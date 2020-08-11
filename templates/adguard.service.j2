@@ -1,0 +1,20 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=AdGuard Home
+After=network-online.target
+
+[Service]
+Type=simple
+User=adguard
+Group=adguard
+WorkingDirectory={{ adguard_dir }}
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart={{ adguard_dir }}/AdGuardHome
+SyslogIdentifier=adguard
+KillMode=control-group
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+

@@ -1,0 +1,11 @@
+---
+- name: reload systemd configuration
+  become: yes
+  systemd:
+    daemon_reload: true
+
+- name: restart adguard
+  become: true
+  systemd:
+    name: adguard
+    state: restarted
